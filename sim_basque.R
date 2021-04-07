@@ -18,13 +18,13 @@ library(scinference)
 
 set.seed(12345)
 
-setwd("/Users/kasparwuthrich/Dropbox/research/SC/SC with Victor and Yinchu/Asymptotics Paper")
+setwd("/Users/kasparwuthrich/Dropbox/research/SC/SC with Victor and Yinchu/Asymptotics Paper/ttest_sc")
 
 ###################################################################
 # Functions
 ###################################################################
 
-source("Code/common_functions_001.R")
+source("common_functions.R")
 
 sim.one.sample <- function(DGP,T0,T1,J,K,Lambda,rho.u,var.u,var.factors,rho.vec,var.epsl.vec,w0.sc){
 

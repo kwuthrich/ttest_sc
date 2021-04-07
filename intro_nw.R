@@ -22,7 +22,7 @@ setwd("/Users/kasparwuthrich/Dropbox/research/SC/SC with Victor and Yinchu/Asymp
 # Functions
 ###################################################################
 
-source("Code/common_functions_001.R")
+source("ttest_sc/common_functions.R")
 
 sim <- function(T0,T1,rho,K,alpha.sig){
 

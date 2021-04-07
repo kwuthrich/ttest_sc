@@ -16,9 +16,9 @@ library(xtable)
 library(Synth)
 library(scinference)
 
-setwd("/Users/kasparwuthrich/Dropbox/research/SC/SC with Victor and Yinchu/Asymptotics Paper")
-
 set.seed(12345)
+
+setwd("/Users/kasparwuthrich/Dropbox/research/SC/SC with Victor and Yinchu/Asymptotics Paper")
 
 #######################################################
 # Data

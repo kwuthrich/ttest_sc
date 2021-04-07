@@ -24,7 +24,7 @@ setwd("/Users/kasparwuthrich/Dropbox/research/SC/SC with Victor and Yinchu/Asymp
 # Functions
 ###################################################################
 
-source("Code/common_functions_001.R")
+source("ttest_sc/common_functions.R")
 
 sim.one.sample <- function(T0,T1,J,K.vec,rho.u,mu){
     
