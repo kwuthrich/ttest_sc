@@ -113,7 +113,7 @@ lines(rho.vec,results.mat.2[,1],col="black",lwd=5, lty=1,type="b",pch=1)
 lines(rho.vec,results.mat.3[,1],col="black",lwd=5, lty=1,type="b",pch=2)
 lines(rho.vec,results.mat.3[,2],col="black",lwd=5, lty=1,type="b",pch=3)
 abline(h=0.1,lty=1,lwd=1,col="gray")
-legend("topleft",legend=c("T-test (K=2)","T-test (K=3)","Newey-West standard errors"), seg.len=2, col=c("black","black"),fill=NA,border=NA, lty=c(1,1,1),lwd=c(5,5,5), pch=c(1,2,3), merge=T,bty="n")
+legend("topleft",legend=c("Proposed t-test (K=2)","Proposed t-test (K=3)","Conventional Newey-West standard errors"), seg.len=2, col=c("black","black"),fill=NA,border=NA, lty=c(1,1,1),lwd=c(5,5,5), pch=c(1,2,3), merge=T,bty="n")
 dev.off()
 
 graphics.off()
