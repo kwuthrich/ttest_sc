@@ -57,14 +57,14 @@ sim <- function(T0,T1,rho,K,alpha.sig){
   rej.z   <- (abs(z.hat)> qnorm(1-alpha.sig/2))
   
   # true lrv
-  lrv         <- ((1-rho^2)/(1-rho)^2)/T0
-  c0          <- T0/T1
-  g.c0.K      <- K*(c0<1)+K/c0*(1<=c0&c0<=K)+1*(c0>K)
-  std.lrv     <- sqrt(lrv*T0*(min(c0,1)+g.c0.K/K))/sqrt(min(T0,T1))
-  z.hat       <- tau.hat/std.lrv
-  rej.z.true  <- (abs(z.hat)> qnorm(1-alpha.sig/2))
+  # lrv         <- ((1-rho^2)/(1-rho)^2)/T0
+  # c0          <- T0/T1
+  # g.c0.K      <- K*(c0<1)+K/c0*(1<=c0&c0<=K)+1*(c0>K)
+  # std.lrv     <- sqrt(lrv*T0*(min(c0,1)+g.c0.K/K))/sqrt(min(T0,T1))
+  # z.hat       <- tau.hat/std.lrv
+  # rej.z.true  <- (abs(z.hat)> qnorm(1-alpha.sig/2))
   
-  return(c(rej.t,rej.z,rej.z.true))
+  return(c(rej.t,rej.z))
   
 }
 
@@ -82,9 +82,9 @@ alpha.sig <- 0.1
 
 # K=2
 K <- 2
-results.mat.2 <- matrix(NA,length(rho.vec),3)
+results.mat.2 <- matrix(NA,length(rho.vec),2)
 for (r in 1:length(rho.vec)){
-  temp.mat <- matrix(NA,nreps,3)
+  temp.mat <- matrix(NA,nreps,2)
   for (rep in 1:nreps){
     temp.mat[rep,] <- sim(T0,T1,rho.vec[r],K,alpha.sig)
   }
@@ -93,9 +93,9 @@ for (r in 1:length(rho.vec)){
 
 # K=3
 K <- 3
-results.mat.3 <- matrix(NA,length(rho.vec),3)
+results.mat.3 <- matrix(NA,length(rho.vec),2)
 for (r in 1:length(rho.vec)){
-  temp.mat <- matrix(NA,nreps,3)
+  temp.mat <- matrix(NA,nreps,2)
   for (rep in 1:nreps){
     temp.mat[rep,] <- sim(T0,T1,rho.vec[r],K,alpha.sig)
   }
