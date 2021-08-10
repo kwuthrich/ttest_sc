@@ -15,16 +15,16 @@ rm(list = ls())
 library(Synth)
 library(xtable)
 library(scinference)
-
+library(rgl)
 set.seed(12345)
 
-setwd("/Users/kasparwuthrich/Dropbox/research/SC/SC with Victor and Yinchu/Asymptotics Paper/ttest_sc")
+setwd("/Users/kasparwuthrich/Dropbox/research/SC/SC with Victor and Yinchu/Asymptotics Paper")
 
 ###################################################################
 # Functions
 ###################################################################
 
-source("common_functions.R")
+source("ttest_sc/common_functions.R")
 
 sim.one.sample <- function(DGP,T0,T1,J,K,Lambda,rho.u,var.u,var.factors,rho.vec,var.epsl.vec,w0.sc){
 
@@ -212,7 +212,9 @@ round(c(min(rho.vec),max(rho.vec),median(rho.vec)),digits=2)
 # Simulations
 #######################################################
 
-nreps     <- 5000
+### Simulations for different DGPs
+
+nreps     <- 10000
 
 for (DGP in 1:9){
 
@@ -239,5 +241,61 @@ for (DGP in 1:9){
   print(round(c(overall_K2_150[5]/overall_K2_150[4],overall_K3_150[5]/overall_K3_150[4]),digits=2))
 
   print(xtable(cbind(c(2,3),rbind(overall_K2,overall_K3)),digits=c(0,0,rep(2,12))),include.rownames = F)
+
+}
+
+
+### Illustrating trade-off when choosing K
+
+Ks  <- 2:5
+T0s <- c(20,40,60,80,100)
+
+overall_cov_Ks <- overall_leng_Ks<- matrix(NA,length(Ks),length(T0s))
+
+for (k in 1:length(Ks)){
+  
+  for (t in 1:length(T0s)){
+    
+    res_temp <- matrix(NA,nreps,6)
+    
+    for (r in 1:nreps){
+      res_temp[r,]   <- sim.one.sample(1,T0s[t],T1,J,Ks[k],Lambda,rho.u,var.u,var.factors,rho.vec,var.epsl.vec,w0.sc)
+    }
+    
+    overall_cov_Ks[k,t] <- colMeans(res_temp)[1]
+    overall_leng_Ks[k,t] <- colMeans(res_temp)[4]
+    
+  }
   
 }
+
+#######################################################
+# Figures trade-off
+#######################################################
+
+# The coloring is based on the example here: https://rdrr.io/r/graphics/persp.html
+
+cov_axis <- c(0.6,1)
+leng_axis <- c(0,0.6)
+
+nrowz <- nrow(overall_cov_Ks)
+ncolz <- ncol(overall_cov_Ks)
+jet.colors <- colorRampPalette( c("orange", "blue") )
+ncol <- 100
+color <- jet.colors(ncol)
+
+midpoints_cov <- overall_cov_Ks[-1, -1] + overall_cov_Ks[-1, -ncolz] + overall_cov_Ks[-nrowz, -1] + overall_cov_Ks[-nrowz, -ncolz]
+pdf("Paper/Graphics/3d_cov.pdf",pointsize=18,width=10.0,height=8.0)
+pmat <- persp(x=Ks,y=T0s,z=overall_cov_Ks,col = color[cut(midpoints_cov,ncol)], xlim=range(Ks),ylim=range(T0s),
+      zlim=range(cov_axis),xlab="K",ylab="Number of pre-treatment periods",zlab="Coverage",ticktype="detailed",expand=0.8,theta = 50,phi=20,d=10,nticks=4,main="Coverage 90% confidence intervals")
+dev.off()
+
+jet.colors <- colorRampPalette( c("blue", "orange") )
+ncol <- 100
+color <- jet.colors(ncol)
+midpoints_leng <- overall_leng_Ks[-1, -1] + overall_leng_Ks[-1, -ncolz] + overall_leng_Ks[-nrowz, -1] + overall_leng_Ks[-nrowz, -ncolz]
+pdf("Paper/Graphics/3d_leng.pdf",pointsize=18,width=10.0,height=8.0)
+pmat <- persp(x=Ks,y=T0s,z=overall_leng_Ks,col = color[cut(midpoints_leng, ncol)],xlim=range(Ks),ylim=range(T0s),
+      zlim=range(leng_axis),xlab="K",ylab="Number of pre-treatment periods",zlab="Average length",ticktype="detailed",expand=0.8,theta = 50,phi=20,d=10,nticks=4,main="Average length 90% confidence intervals")
+dev.off()
+
