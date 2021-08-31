@@ -19,13 +19,13 @@ library(limSolve)
 library(rgl)
 set.seed(12345)
 
-setwd("/Users/kasparwuthrich/Dropbox/research/SC/SC with Victor and Yinchu/Asymptotics Paper")
+setwd("/Users/kasparwuthrich/Dropbox/research/SC/SC with Victor and Yinchu/Asymptotics Paper/ttest_sc")
 
 ###################################################################
 # Functions
 ###################################################################
 
-source("ttest_sc/common_functions.R")
+source("common_functions.R")
 
 sim.one.sample <- function(DGP,T0,T1,J,K,Lambda,rho.u,var.u,var.factors,rho.vec,var.epsl.vec,w0.sc){
 
@@ -286,7 +286,7 @@ ncol <- 100
 color <- jet.colors(ncol)
 
 midpoints_cov <- overall_cov_Ks[-1, -1] + overall_cov_Ks[-1, -ncolz] + overall_cov_Ks[-nrowz, -1] + overall_cov_Ks[-nrowz, -ncolz]
-pdf("Paper/Graphics/3d_cov.pdf",pointsize=18,width=10.0,height=8.0)
+pdf("graphics/3d_cov.pdf",pointsize=18,width=10.0,height=8.0)
 pmat <- persp(x=Ks,y=T0s,z=overall_cov_Ks,col = color[cut(midpoints_cov,ncol)], xlim=range(Ks),ylim=range(T0s),
       zlim=range(cov_axis),xlab="K",ylab="Number of pre-treatment periods",zlab="Coverage",ticktype="detailed",expand=0.8,theta = 50,phi=20,d=10,nticks=4,main="Coverage 90% confidence intervals")
 dev.off()
@@ -295,7 +295,7 @@ jet.colors <- colorRampPalette( c("blue", "orange") )
 ncol <- 100
 color <- jet.colors(ncol)
 midpoints_leng <- overall_leng_Ks[-1, -1] + overall_leng_Ks[-1, -ncolz] + overall_leng_Ks[-nrowz, -1] + overall_leng_Ks[-nrowz, -ncolz]
-pdf("Paper/Graphics/3d_leng.pdf",pointsize=18,width=10.0,height=8.0)
+pdf("graphics/3d_leng.pdf",pointsize=18,width=10.0,height=8.0)
 pmat <- persp(x=Ks,y=T0s,z=overall_leng_Ks,col = color[cut(midpoints_leng, ncol)],xlim=range(Ks),ylim=range(T0s),
       zlim=range(leng_axis),xlab="K",ylab="Number of pre-treatment periods",zlab="Average length",ticktype="detailed",expand=0.8,theta = 50,phi=20,d=10,nticks=4,main="Average length 90% confidence intervals")
 dev.off()

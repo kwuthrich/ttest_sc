@@ -17,13 +17,13 @@ library(limSolve)
 
 set.seed(12345)
 
-setwd("/Users/kasparwuthrich/Dropbox/research/SC/SC with Victor and Yinchu/Asymptotics Paper")
+setwd("/Users/kasparwuthrich/Dropbox/research/SC/SC with Victor and Yinchu/Asymptotics Paper/ttest_sc")
 
 ###################################################################
 # Functions
 ###################################################################
 
-source("ttest_sc/common_functions.R")
+source("common_functions.R")
 
 sim <- function(T0,T1,rho,K,alpha.sig){
 
@@ -108,7 +108,7 @@ for (r in 1:length(rho.vec)){
 ###################################################################
 
 graphics.off()
-pdf("Paper/Graphics/sizedistortion_lrv.pdf",pointsize=16,width=8.0,height=6.0)
+pdf("graphics/sizedistortion_lrv.pdf",pointsize=16,width=8.0,height=6.0)
 plot(1, xlab="AR(1) coefficient", ylab="Size", main="", col="blue", pch=".", xlim = c(0,1), ylim=c(0,0.6))
 lines(rho.vec,results.mat.2[,1],col="black",lwd=5, lty=1,type="b",pch=1)
 lines(rho.vec,results.mat.3[,1],col="black",lwd=5, lty=1,type="b",pch=2)
@@ -118,7 +118,7 @@ legend("topleft",legend=c("Proposed t-test (K=2)","Proposed t-test (K=3)","Conve
 dev.off()
 
 graphics.off()
-pdf("Paper/Graphics/sizedistortion_lrv_nw_only.pdf",pointsize=16,width=8.0,height=6.0)
+pdf("graphics/sizedistortion_lrv_nw_only.pdf",pointsize=16,width=8.0,height=6.0)
 plot(1, xlab="AR(1) coefficient", ylab="Size", main="", col="blue", pch=".", xlim = c(0,1), ylim=c(0,0.6))
 lines(rho.vec,results.mat.3[,2],col="black",lwd=5, lty=1,type="b",pch=3)
 abline(h=0.1,lty=1,lwd=1,col="gray")

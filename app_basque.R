@@ -19,7 +19,7 @@ library(limSolve)
 
 set.seed(12345)
 
-setwd("/Users/kasparwuthrich/Dropbox/research/SC/SC with Victor and Yinchu/Asymptotics Paper")
+setwd("/Users/kasparwuthrich/Dropbox/research/SC/SC with Victor and Yinchu/Asymptotics Paper/ttest_sc")
 
 #######################################################
 # Data
@@ -42,7 +42,7 @@ J <- dim(Y0)[2]
 
 graphics.off()
 time <- c(seq(1955,1997,1))
-pdf("Paper/Graphics/basque_data_raw.pdf",pointsize=14,width=9.0,height=6.0)
+pdf("graphics/basque_data_raw.pdf",pointsize=14,width=9.0,height=6.0)
 plot(1, ylab="Per Capita GDP", xlab="Time", main="", col="blue", pch=".", xlim = range(time), ylim=c(1,13))
 for (j in 1:dim(Y0)[2]) lines(time,Y0[,j],col="black",lwd=0.5,lty=1)
 lines(time,Y1,col="black",lwd=5,lty=1)

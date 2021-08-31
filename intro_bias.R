@@ -19,13 +19,13 @@ library(limSolve)
 
 set.seed(12345)
 
-setwd("/Users/kasparwuthrich/Dropbox/research/SC/SC with Victor and Yinchu/Asymptotics Paper")
+setwd("/Users/kasparwuthrich/Dropbox/research/SC/SC with Victor and Yinchu/Asymptotics Paper/ttest_sc")
 
 ###################################################################
 # Functions
 ###################################################################
 
-source("ttest_sc/common_functions.R")
+source("common_functions.R")
 
 sim.one.sample <- function(T0,T1,J,K.vec,rho.u,mu){
     
@@ -110,7 +110,7 @@ sc.original.results.per <- sc.original.results.per[xl < sc.original.results.per 
 sc.debiased.results.per <- sc.debiased.results.per[xl < sc.debiased.results.per & sc.debiased.results.per<xu]
 
 graphics.off()
-pdf("Paper/Graphics/hist_sc_per.pdf",pointsize=16,width=8.0,height=6.0)
+pdf("graphics/hist_sc_per.pdf",pointsize=16,width=8.0,height=6.0)
 h <- hist(sc.original.results.per, breaks=c(seq(xl,xu,length=40)), col="gray", xlab="", main="Correct specification: SC estimator w/o debiasing",freq=F,xlim=c(xl,xu),ylim=c(yl,yu))
 xfit <- seq(min(xl),max(xu),length=1000) 
 yfit <- dnorm(xfit,mean=0,sd=sd(sc.original.results.per)) 
@@ -119,7 +119,7 @@ legend("topleft",legend=c("Simulation","Normal curve"), col=c("gray","black"),fi
 dev.off()
 
 graphics.off()
-pdf("Paper/Graphics/hist_sc_debiased_per.pdf",pointsize=16,width=8.0,height=6.0)
+pdf("graphics/hist_sc_debiased_per.pdf",pointsize=16,width=8.0,height=6.0)
 h <- hist(sc.debiased.results.per, breaks=c(seq(xl,xu,length=40)), col="gray", xlab="", main="Correct specification: De-biased SC estimator",freq=F,xlim=c(xl,xu),ylim=c(yl,yu)) 
 xfit <- seq(min(xl),max(xu),length=1000) 
 yfit <- dnorm(xfit,mean=0,sd=sd(sc.debiased.results.per)) 
@@ -137,7 +137,7 @@ sc.original.results.misspec.per <- sc.original.results.misspec.per[xl < sc.origi
 sc.debiased.results.misspec.per <- sc.debiased.results.misspec.per[xl < sc.debiased.results.misspec.per & sc.debiased.results.misspec.per<xu]
 
 graphics.off()
-pdf("Paper/Graphics/hist_intercept_sc_per.pdf",pointsize=16,width=8.0,height=6.0)
+pdf("graphics/hist_intercept_sc_per.pdf",pointsize=16,width=8.0,height=6.0)
 h <- hist(sc.original.results.misspec.per, breaks=c(seq(xl,xu,length=40)), col="gray", xlab="", main="Misspecification: SC estimator w/o debiasing",freq=F,xlim=c(xl,xu),ylim=c(yl,yu))
 xfit <- seq(min(xl),max(xu),length=1000) 
 yfit <- dnorm(xfit,mean=0,sd=sd(sc.original.results.misspec.per)) 
@@ -146,7 +146,7 @@ legend("topleft",legend=c("Simulation","Normal curve"), col=c("gray","black"),fi
 dev.off()
 
 graphics.off()
-pdf("Paper/Graphics/hist_intercept_sc_debiased_per.pdf",pointsize=16,width=8.0,height=6.0)
+pdf("graphics/hist_intercept_sc_debiased_per.pdf",pointsize=16,width=8.0,height=6.0)
 h <- hist(sc.debiased.results.misspec.per, breaks=c(seq(xl,xu,length=40)), col="gray", xlab="", main="Misspecification: De-biased SC estimator",freq=F,xlim=c(xl,xu),ylim=c(yl,yu)) 
 xfit <- seq(min(xl),max(xu),length=1000) 
 yfit <- dnorm(xfit,mean=0,sd=sd(sc.debiased.results.misspec.per)) 
