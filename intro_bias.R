@@ -15,6 +15,7 @@ rm(list = ls())
 library(Synth)
 library(xtable)
 library(scinference)
+library(limSolve)
 
 set.seed(12345)
 

@@ -15,6 +15,7 @@ rm(list = ls())
 library(Synth)
 library(xtable)
 library(scinference)
+library(limSolve)
 library(rgl)
 set.seed(12345)
 
@@ -214,7 +215,7 @@ round(c(min(rho.vec),max(rho.vec),median(rho.vec)),digits=2)
 
 ### Simulations for different DGPs
 
-nreps     <- 10000
+nreps <- 10000
 
 for (DGP in 1:9){
 

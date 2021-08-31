@@ -6,8 +6,6 @@
 # Questions/error reports: kwuthrich@ucsd.edu
 #####################################################################
 
-library(limSolve)
-
 # AR(1) with given error variance
 generate.AR.series.var.input <- function(T01,rho,var.error){
   u     <- matrix(NA,T01,1)
