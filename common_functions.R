@@ -30,13 +30,14 @@ generate.AR.series <- function(T01,rho){
   return(u)
 }
 
-# SC estimator of w 
+# SC estimator (simplified version of the one in the R-package scinference)
 sc <- function(Y1,Y0){
-  E <- matrix(1,1,ncol(Y0))
-  F <- 1
-  G <- diag(ncol(Y0))
-  H <- matrix(0,ncol(Y0),1)
-  w.hat <- cbind(lsei(A=Y0, B=Y1, E=E, F=F, G=G, H=H, type=2)$X)
+  J <- dim(Y0)[2]
+  e <- matrix(1,1,J)
+  f <- 1
+  g <- diag(x=1,J,J)
+  h <- matrix(0,J,1)
+  w.hat <- cbind(lsei(A=Y0,B=Y1,E=e,F=f,G=g,H=h,type=2)$X)
   return(w.hat)
 }
 
