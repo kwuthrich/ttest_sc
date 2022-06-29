@@ -17,8 +17,6 @@ library(limSolve)
 
 set.seed(12345)
 
-setwd("/Users/kasparwuthrich/Dropbox/research/SC/SC with Victor and Yinchu/Asymptotics Paper/ttest_sc")
-
 ###################################################################
 # Functions
 ###################################################################
@@ -104,7 +102,7 @@ for (r in 1:length(rho.vec)){
 }
 
 ###################################################################
-# Simulations
+# Graphics
 ###################################################################
 
 graphics.off()

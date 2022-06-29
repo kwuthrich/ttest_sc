@@ -30,17 +30,6 @@ generate.AR.series <- function(T01,rho){
   return(u)
 }
 
-# SC estimator (simplified version of the one in the R-package scinference)
-sc <- function(Y1,Y0){
-  J <- dim(Y0)[2]
-  e <- matrix(1,1,J)
-  f <- 1
-  g <- diag(x=1,J,J)
-  h <- matrix(0,J,1)
-  w.hat <- cbind(lsei(A=Y0,B=Y1,E=e,F=f,G=g,H=h,type=2)$X)
-  return(w.hat)
-}
-
 # Oracle approach based on known w
 oracle.cf <- function(y1,yJ,T0,T1,w.true,K){
   

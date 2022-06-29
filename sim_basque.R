@@ -16,10 +16,9 @@ library(Synth)
 library(xtable)
 library(scinference)
 library(limSolve)
+
 library(rgl)
 set.seed(12345)
-
-setwd("/Users/kasparwuthrich/Dropbox/research/SC/SC with Victor and Yinchu/Asymptotics Paper/ttest_sc")
 
 ###################################################################
 # Functions
@@ -114,7 +113,7 @@ sim.one.sample <- function(DGP,T0,T1,J,K,Lambda,rho.u,var.u,var.factors,rho.vec,
   Y1 <- Y0 %*% w + u.sim
 
   # Results
-  r.sc.sim    <- scinference(Y1,Y0,T1=T1,T0=T0,inference_method="ttest",K=K)
+  r.sc.sim    <- scinference(Y1,Y0,T1=T1,T0=T0,inference_method="ttest",estimation_method="sc",K=K)
   tau.hat.sc  <- r.sc.sim$att
   se.hat.sc   <- r.sc.sim$se
   cov.sc.vec  <- (abs(tau.hat.sc/se.hat.sc)<=qt(1-alpha.sig/2,df=K-1))
@@ -145,11 +144,11 @@ sim.one.sample <- function(DGP,T0,T1,J,K,Lambda,rho.u,var.u,var.factors,rho.vec,
 ###################################################################
 # Calibration to application
 ###################################################################
-
 data("basque")
 attach(basque)
 data.long <- as.data.frame(cbind(regionno,year,gdpcap))
 data.wide <- reshape(data.long,dir="wide",idvar="regionno",timevar="year")
+detach(basque)
 
 # Raw data
 
@@ -173,7 +172,7 @@ Y0dt <- apply(Y0,2,function(x) x - bX)
 
 ### Fit factor model
 
-w0.sc         <- as.matrix(sc(Y1dt[1:T0],Y0dt[1:T0,]))
+w0.sc         <- as.matrix(scinference:::sc(Y1dt[1:T0],Y0dt[1:T0,],lsei_type = 1)$w.hat)
 u.hat         <- Y1dt[1:T0] - Y0dt[1:T0,] %*% w0.sc
 ar.obj.u.hat  <- ar(u.hat, order.max=1)
 rho.u         <- ar.obj.u.hat$ar

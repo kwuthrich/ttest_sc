@@ -19,8 +19,6 @@ library(limSolve)
 
 set.seed(12345)
 
-setwd("/Users/kasparwuthrich/Dropbox/research/SC/SC with Victor and Yinchu/Asymptotics Paper/ttest_sc")
-
 ###################################################################
 # Functions
 ###################################################################
@@ -50,13 +48,13 @@ sim.one.sample <- function(T0,T1,J,K.vec,rho.u,mu){
   Y1.post <- Y1[(T0+1):T01]
   Y0.post <- Y0[(T0+1):T01,]
   
-  w.hat         <- sc(Y1.pre,Y0.pre)
+  w.hat         <- scinference:::sc(Y1.pre,Y0.pre,lsei_type=1)$w.hat
   tau.hat.nodb  <- mean(Y1.post -Y0.post %*% w.hat)
   
   # Results
   tau.vec.db   <- rep(NA,length(K.vec))
   for (k in 1:length(K.vec)){
-    tau.vec.db[k] <- scinference(Y1,Y0,T1=T1,T0=T0,inference_method="ttest",K=K.vec[k])$att
+    tau.vec.db[k] <- scinference(Y1,Y0,T1=T1,T0=T0,inference_method="ttest",estimation_method="sc",K=K.vec[k])$att
   }
   
   return(c(tau.hat.nodb,tau.vec.db))
