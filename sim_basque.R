@@ -275,8 +275,6 @@ for (k in 1:length(Ks)){
 
 # The coloring is based on the example here: https://rdrr.io/r/graphics/persp.html
 
-options(rgl.useNULL = TRUE)
-
 cov_axis <- c(0.6,1)
 leng_axis <- c(0,0.6)
 
