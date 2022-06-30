@@ -237,8 +237,8 @@ for (DGP in 1:9){
 
   print(DGP)
 
-  print(round(c(overall_K2_15[5]/overall_K2_15[4],overall_K3_15[5]/overall_K3_15[4]),digits=2))
-  print(round(c(overall_K2_150[5]/overall_K2_150[4],overall_K3_150[5]/overall_K3_150[4]),digits=2))
+  print(round(c(overall_K2_15[4]/overall_K2_15[5],overall_K3_15[4]/overall_K3_15[5]),digits=2))
+  print(round(c(overall_K2_150[4]/overall_K2_150[5],overall_K3_150[4]/overall_K3_150[5]),digits=2))
 
   print(xtable(cbind(c(2,3),rbind(overall_K2,overall_K3)),digits=c(0,0,rep(2,12))),include.rownames = F)
 
@@ -274,6 +274,8 @@ for (k in 1:length(Ks)){
 #######################################################
 
 # The coloring is based on the example here: https://rdrr.io/r/graphics/persp.html
+
+options(rgl.useNULL = TRUE)
 
 cov_axis <- c(0.6,1)
 leng_axis <- c(0,0.6)
