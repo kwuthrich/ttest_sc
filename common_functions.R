@@ -10,7 +10,7 @@
 generate.AR.series.var.input <- function(T01,rho,var.error){
   u     <- matrix(NA,T01,1)
   epsl  <- matrix(rnorm(T01),T01,1)*sqrt(var.error)
-  startvalue <- sqrt(var.error/(1-rho^2))
+  startvalue <- rnorm(1)*sqrt(var.error/(1-rho^2))
   u[1,] <- rho*startvalue +epsl[1,]
   for (t in 2:T01){
     u[t,] <- rho*u[(t-1),]+epsl[t,]
