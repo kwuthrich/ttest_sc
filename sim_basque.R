@@ -82,7 +82,7 @@ sim.one.sample <- function(DGP,T0,T1,J,K,Lambda,rho.u,var.u,var.factors,rho.vec,
     for (j in 1:J){
       theta     <- rep(NA,(T0+T1))
       wn        <- rnorm((T0+T1))
-      theta[1]  <- wn[1]
+      theta[1]  <- j + wn[1]
       for (t in 2:(T0+T1)){
         theta[t] <- j+theta[(t-1)] + wn[t]
       }
